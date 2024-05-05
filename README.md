@@ -11,7 +11,7 @@ This script automates fetching, paginating, and storing transaction data from th
 
 1. Ensure you have Python 3.x installed on your system.
 2. Install the Requests library by running `pip install requests` in your terminal or command prompt.
-3. Replace the value of `current_params_file` with the path to your `current_params.txt` file.
+3. Replace the value of `current_params_file` with the path to your `current_params.txt` file. If the file does not exist or emtpy, it will be created automatically.
 4. Execute the script.
 
 ## Usage
