@@ -110,10 +110,10 @@ def check_file_size(filename):
     else:
         return False
 
-# Đường dẫn tới tệp current_params.txt
+# path to reach current_params.txt file
 current_params_file = "current_params.txt"
 
-# Đọc thông tin từ tệp current_params.txt
+# Read info from current_params.txt file
 with open(current_params_file, 'r') as file:
     next_page_params = json.loads(file.read())
 
@@ -133,22 +133,22 @@ while api_url:
     print("-------- API_URL --------")
     print(api_url)
     next_page_params, items = get_data(api_url)
-    print("--------- Next Paramt")
+    print("--------- Next Params")
     print(next_page_params)
     write_params_to_file(next_page_params, current_params_file)
     append_params_to_file(next_page_params, called_params_file)
     
     save_to_csv(items, transaction_file)
 
-    # Kiểm tra kích thước của tệp transaction.csv
+    # checking the size of transaction.csv file
     if check_file_size(transaction_file):
-        # Đổi tên tệp transaction
+        # change transaction file name 
         archive_transaction_file = f"./data/transaction_{len(os.listdir('./data')) + 1}.csv"
         os.rename(transaction_file, archive_transaction_file)
-        # Copy template thành transaction và tiếp tục
+        # Copy the template and continue
         shutil.copy(template_transaction_file, transaction_file)
     
-    # Xây dựng URL cho trang tiếp theo
+    # create another url with next parameter
     api_url_params = "&".join([f"{key}={value}" for key, value in next_page_params.items()])
     api_url = f"{api_url_base}?{api_url_params}"
 
